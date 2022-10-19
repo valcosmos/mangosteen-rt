@@ -8,6 +8,7 @@ export const welcomeRoutes = {
   path: 'welcome',
   element: <WelcomeLayout />,
   children: [
+    // { index: true, element: <div>welcome</div> },
     { path: '1', element: <Welcome1 /> },
     { path: '2', element: <Welcome2 /> },
     { path: '3', element: <Welcome3 /> },

@@ -5,7 +5,7 @@ interface Welcome1Props {}
 
 const Welcome2: FC<Welcome1Props> = () => {
   return (
-    <div>
+    <div style={{ border: '1px solid red' }}>
       2 <NavLink to={'/welcome/3'}>下一页</NavLink>{' '}
     </div>
   )
