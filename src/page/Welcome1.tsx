@@ -1,12 +1,11 @@
 import type { FC } from 'react'
-import { NavLink } from 'react-router-dom'
-
+import s from './Welcome1.module.scss'
 interface Welcome1Props {}
 
 const Welcome1: FC<Welcome1Props> = () => {
   return (
-    <div style={{ border: '1px solid red' }}>
-      1 <NavLink to={'/welcome/2'}>下一页</NavLink>{' '}
+    <div className={s.wrapper}>
+111
     </div>
   )
 }
