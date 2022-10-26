@@ -1,12 +1,14 @@
 import type { FC } from 'react'
-import { NavLink } from 'react-router-dom'
 
 interface Welcome1Props {}
 
 const Welcome4: FC<Welcome1Props> = () => {
   return (
-    <div style={{ border: '1px solid red' }}>
-      4 <NavLink to={'/welcome/5'}>下一页</NavLink>{' '}
+    <div text-center>
+      <img />
+      <h2 text-32px mt-48px>
+        云备份 <br /> 再也不怕数据丢失
+      </h2>
     </div>
   )
 }

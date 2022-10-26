@@ -1,6 +1,6 @@
 import { animated, useTransition } from '@react-spring/web'
 import type { FC, ReactNode } from 'react'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 
 interface WelcomeLayoutProps {}
@@ -19,12 +19,21 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
   const outlet = useOutlet()
   // map作为outlet缓存
   map.current[location.pathname] = outlet
+
+  const [x, setX] = useState({ position: 'relative', margin: '0px' })
+
   const transition = useTransition(location.pathname, {
     from: { transform: location.pathname === '/welcome/1' ? 'translateX(0%)' : 'translateX(100%)' },
     enter: { transform: 'translateX(0%)' },
     leave: { transform: 'translateX(-100%)' },
     config: {
       duration: 300,
+    },
+    onStart: () => {
+      setX({ position: 'absolute' })
+    },
+    onRest: () => {
+      setX({ position: 'relative' })
     },
   })
   return (
@@ -35,11 +44,13 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
           山竹记账
         </h1>
       </header>
-      <main shrink-1 grow-1 bg-white mx-16px rounded-8px flex justify-center>
+      <main shrink-1 grow-1 relative>
         {transition((style, pathname) => (
-          <animated.div style={style} key={pathname}>
+          <animated.div style={{ ...style, ...x }} key={pathname} flex h="100%" w="100%" p-16px>
             {/* <Outlet /> */}
-            {map.current[pathname]}
+            <div grow-1 bg-white rounded-8px flex justify-center items-center>
+              {map.current[pathname]}
+            </div>
           </animated.div>
         ))}
       </main>

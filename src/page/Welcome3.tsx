@@ -1,13 +1,14 @@
 import type { FC } from 'react'
-import { Link } from 'react-router-dom'
-// import { NavLink } from 'react-router-dom'
 
 interface Welcome1Props {}
 
 const Welcome3: FC<Welcome1Props> = () => {
   return (
-    <div>
-      <Link to="/welcome/4">下一页</Link>
+    <div text-center>
+      <img />
+      <h2 text-32px mt-48px>
+        数据可视化 <br /> 收支一目了然
+      </h2>
     </div>
   )
 }
