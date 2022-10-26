@@ -2,3 +2,19 @@
   /* --un-ring-offset-shadow: 10px; */
   --un-shadow-color: red;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

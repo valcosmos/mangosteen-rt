@@ -1,11 +1,14 @@
 import type { FC } from 'react'
-import s from './Welcome1.module.scss'
+
 interface Welcome1Props {}
 
 const Welcome1: FC<Welcome1Props> = () => {
   return (
-    <div className={s.wrapper}>
-111
+    <div text-center>
+      <img />
+      <h2 text-32px mt-48px>
+        会挣钱 <br /> 还要会省钱
+      </h2>
     </div>
   )
 }
