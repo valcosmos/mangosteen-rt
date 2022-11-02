@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { animated, useTransition } from '@react-spring/web'
 import type { FC, ReactNode, TouchEvent } from 'react'
 import { Link, useLocation, useOutlet } from 'react-router-dom'
+import { useLocalStore } from '../stores/useLocalStore'
 
 interface WelcomeLayoutProps {}
 
@@ -43,7 +44,6 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
 
   useEffect(() => {
     if (!refMain.current) {
-
     }
   }, [])
 
@@ -59,6 +59,11 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
   }
   const onTouchEnd = (e: TouchEvent) => {
     console.log(e)
+  }
+
+  const { setHasReadWelcomes } = useLocalStore()
+  const onSkip = () => {
+    setHasReadWelcomes(true)
   }
 
   return (
@@ -91,7 +96,7 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
         <Link style={{ gridArea: '1/2/2/3' }} to={linkMap[location.pathname]}>
           下一页
         </Link>
-        <Link style={{ gridArea: '1/3/2/4' }} to={'/welcome/start'}>
+        <Link style={{ gridArea: '1/3/2/4' }} to={'/welcome/start'} onClick={onSkip}>
           跳过
         </Link>
       </footer>
