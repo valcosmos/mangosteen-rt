@@ -1,9 +1,8 @@
+import React from 'react'
 import type { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 
-interface MainLayoutProps {
-
-}
+interface MainLayoutProps {}
 
 const MainLayout: FC<MainLayoutProps> = () => {
   return (

@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import WelcomeLayout from '../layouts/WelcomeLayout'
 import Welcome1 from '../page/Welcome1'
 import Welcome2 from '../page/Welcome2'

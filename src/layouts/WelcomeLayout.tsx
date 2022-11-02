@@ -1,6 +1,8 @@
+import * as React from 'react'
+import { useEffect, useRef, useState } from 'react'
+
 import { animated, useTransition } from '@react-spring/web'
-import type { FC, ReactNode } from 'react'
-import { useRef, useState } from 'react'
+import type { FC, ReactNode, TouchEvent } from 'react'
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 
 interface WelcomeLayoutProps {}
@@ -20,7 +22,7 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
   // map作为outlet缓存
   map.current[location.pathname] = outlet
 
-  const [x, setX] = useState({ position: 'relative', margin: '0px' })
+  const [x, setX] = useState({ position: 'relative' })
 
   const transition = useTransition(location.pathname, {
     from: { transform: location.pathname === '/welcome/1' ? 'translateX(0%)' : 'translateX(100%)' },
@@ -36,6 +38,29 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
       setX({ position: 'relative' })
     },
   })
+
+  const refMain = useRef<HTMLElement>()
+
+  useEffect(() => {
+    if (!refMain.current) {
+
+    }
+  }, [])
+
+  const [position, setPosition] = useState({ x: -1, y: -1 })
+
+  const onTouchStart = (e: TouchEvent) => {
+    const newPosition = { x: parseInt(e.clientX), y: parseInt(e.clientY) }
+    setPosition(newPosition)
+  }
+  const onTouchMove = (e: TouchEvent) => {
+    const newPosition = { x: e.clientX, y: e.clientY }
+    const move = { x: newPosition.x - position.x, y: newPosition.y - position.y }
+  }
+  const onTouchEnd = (e: TouchEvent) => {
+    console.log(e)
+  }
+
   return (
     <div className="bg-#5f34bf" h-screen flex flex-col items-stretch pb-16px>
       <header shrink-0 text-center pt-64px>
@@ -44,7 +69,15 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
           山竹记账
         </h1>
       </header>
-      <main shrink-1 grow-1 relative>
+      <main
+        shrink-1
+        grow-1
+        relative
+        ref={refMain}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {transition((style, pathname) => (
           <animated.div style={{ ...style, ...x }} key={pathname} flex h="100%" w="100%" p-16px>
             {/* <Outlet /> */}

@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { createBrowserRouter } from 'react-router-dom'
 import RedirectToWelcome from '../components/RedirectToWelcome'
 import MainLayout from '../layouts/MainLayout'

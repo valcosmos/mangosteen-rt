@@ -1,4 +1,11 @@
-import { defineConfig, presetAttributify, presetIcons, presetTypography, presetUno, transformerAttributifyJsx } from 'unocss'
+import {
+  defineConfig,
+  presetAttributify,
+  presetIcons,
+  presetTypography,
+  presetUno,
+  transformerAttributifyJsx,
+} from 'unocss'
 // import colors from 'windicss/colors'
 
 export default defineConfig({
