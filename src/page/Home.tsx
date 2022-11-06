@@ -1,13 +1,29 @@
+import axios from 'axios'
 import type { FC } from 'react'
+import { useState } from 'react'
+import useSWR from 'swr'
 
 interface HomeProps {}
 
-const Home: FC<HomeProps> = () => {
-  return (
-    <div text-6xl>
+const fetcher = (path: string) => {
+  return axios.get<{ message: string }>(path)
+}
 
-    </div>
-  )
+const Home: FC<HomeProps> = () => {
+  const { data, error, isValidating } = useSWR('http://121.196.236.94:3000', fetcher)
+
+  console.log(data?.data)
+
+  if (error)
+    return <div>failed</div>
+  if (!data)
+    return <div>loading...</div>
+
+  // 如果正在刷新数据
+  if (isValidating)
+    return <div>正在获取最新值</div>
+
+  return <div text-6xl>{data?.data.message}</div>
 }
 
 export default Home
