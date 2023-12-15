@@ -13,9 +13,6 @@ const ErrorPage: FC<ErrorPageProps> = () => {
   }, [])
 
   return null
-  // return (
-  //   <p>{`status text${error.statusText}` || `message==>${error.message}`}</p>
-  // )
 }
 
 export default ErrorPage

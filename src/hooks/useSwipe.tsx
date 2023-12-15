@@ -1,3 +1,3 @@
-export const useSwipe = () => {
+export function useSwipe() {
   return {}
 }

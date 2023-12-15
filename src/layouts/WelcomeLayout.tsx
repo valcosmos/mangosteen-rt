@@ -42,15 +42,15 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
 
   const refMain = useRef<HTMLElement>()
 
-  useEffect(() => {
-    if (!refMain.current) {
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!refMain.current) {
+  //   }
+  // }, [])
 
   const [position, setPosition] = useState({ x: -1, y: -1 })
 
   const onTouchStart = (e: TouchEvent) => {
-    const newPosition = { x: parseInt(e.clientX), y: parseInt(e.clientY) }
+    const newPosition = { x: Number.parseInt(e.clientX), y: Number.parseInt(e.clientY) }
     setPosition(newPosition)
   }
   const onTouchMove = (e: TouchEvent) => {
@@ -58,7 +58,7 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
     const move = { x: newPosition.x - position.x, y: newPosition.y - position.y }
   }
   const onTouchEnd = (e: TouchEvent) => {
-    console.log(e)
+    // console.log(e)
   }
 
   const { setHasReadWelcomes } = useLocalStore()
@@ -96,7 +96,7 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
         <Link style={{ gridArea: '1/2/2/3' }} to={linkMap[location.pathname]}>
           下一页
         </Link>
-        <Link style={{ gridArea: '1/3/2/4' }} to={'/welcome/start'} onClick={onSkip}>
+        <Link style={{ gridArea: '1/3/2/4' }} to="/welcome/start" onClick={onSkip}>
           跳过
         </Link>
       </footer>

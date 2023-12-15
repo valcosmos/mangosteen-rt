@@ -1,18 +1,15 @@
 import axios from 'axios'
 import type { FC } from 'react'
-import { useState } from 'react'
 import useSWR from 'swr'
 
 interface HomeProps {}
 
-const fetcher = (path: string) => {
+function fetcher(path: string) {
   return axios.get<{ message: string }>(path)
 }
 
 const Home: FC<HomeProps> = () => {
   const { data, error, isValidating } = useSWR('http://121.196.236.94:3000', fetcher)
-
-  console.log(data?.data)
 
   if (error)
     return <div>failed</div>

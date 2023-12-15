@@ -8,7 +8,7 @@ const MainLayout: FC<MainLayoutProps> = () => {
   const hasRead = localStorage.getItem('hasReadWelcomes')
 
   if (hasRead === 'yes') {
-    return <Navigate to={'/home'} />
+    return <Navigate to="/home" />
   }
   else {
     return (

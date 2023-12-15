@@ -8,7 +8,11 @@ const Welcome2: FC<Welcome1Props> = () => {
     <div text-center>
       <img />
       <h2 text-32px mt-48px>
-        每日提醒 <br /> 不会遗漏每一笔账单
+        每日提醒
+        {' '}
+        <br />
+        {' '}
+        不会遗漏每一笔账单
       </h2>
     </div>
   )
