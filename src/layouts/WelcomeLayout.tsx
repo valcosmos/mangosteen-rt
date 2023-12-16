@@ -1,10 +1,9 @@
-import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
-
 import { animated, useTransition } from '@react-spring/web'
-import type { FC, ReactNode, TouchEvent } from 'react'
+import type { CSSProperties, FC, ReactNode, TouchEvent } from 'react'
 import { Link, useLocation, useOutlet } from 'react-router-dom'
 import { useLocalStore } from '../stores/useLocalStore'
+import logo from '../assets/images/logo.svg'
 
 interface WelcomeLayoutProps {}
 
@@ -40,7 +39,7 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
     },
   })
 
-  const refMain = useRef<HTMLElement>()
+  const refMain = useRef<HTMLElement | null>(null)
 
   // useEffect(() => {
   //   if (!refMain.current) {
@@ -49,7 +48,7 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
 
   const [position, setPosition] = useState({ x: -1, y: -1 })
 
-  const onTouchStart = (e: TouchEvent) => {
+  const onTouchStart: React.TouchEventHandler<HTMLElement> = (e) => {
     const newPosition = { x: Number.parseInt(e.clientX), y: Number.parseInt(e.clientY) }
     setPosition(newPosition)
   }
@@ -57,8 +56,9 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
     const newPosition = { x: e.clientX, y: e.clientY }
     const move = { x: newPosition.x - position.x, y: newPosition.y - position.y }
   }
-  const onTouchEnd = (e: TouchEvent) => {
+  const onTouchEnd: React.TouchEventHandler<HTMLElement> = (e) => {
     // console.log(e)
+
   }
 
   const { setHasReadWelcomes } = useLocalStore()
@@ -69,22 +69,28 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
   return (
     <div className="bg-#5f34bf" h-screen flex flex-col items-stretch pb-16px>
       <header shrink-0 text-center pt-64px>
-        <img w-64px />
+        <img w-64px src={logo} />
         <h1 text="#d4d4ee" text-32px>
           山竹记账
         </h1>
       </header>
       <main
-        shrink-1
-        grow-1
-        relative
         ref={refMain}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
+        shrink-1
+        grow-1
+        relative
+        rounded-8px
+        flex
+        justify-center
+        items-center
+        bg-white
+        mx-16px
       >
         {transition((style, pathname) => (
-          <animated.div style={{ ...style, ...x }} key={pathname} flex h="100%" w="100%" p-16px>
+          <animated.div style={{ ...style, ...x } as unknown as CSSProperties} key={pathname} flex h="100%" w="100%" p-16px>
             {/* <Outlet /> */}
             <div grow-1 bg-white rounded-8px flex justify-center items-center>
               {map.current[pathname]}
@@ -93,10 +99,10 @@ const WelcomeLayout: FC<WelcomeLayoutProps> = () => {
         ))}
       </main>
       <footer shrink-0 text-center text-32px text-white grid grid-cols-3 grid-rows-1>
-        <Link style={{ gridArea: '1/2/2/3' }} to={linkMap[location.pathname]}>
+        <Link style={{ gridArea: '1 / 2 / 2 / 3' }} to={linkMap[location.pathname as keyof typeof linkMap]}>
           下一页
         </Link>
-        <Link style={{ gridArea: '1/3/2/4' }} to="/welcome/start" onClick={onSkip}>
+        <Link style={{ gridArea: '1 / 3 / 2 / 4' }} to="/welcome/start" onClick={onSkip}>
           跳过
         </Link>
       </footer>

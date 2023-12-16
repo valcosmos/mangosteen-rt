@@ -4,19 +4,11 @@ import {
   presetIcons,
   presetTypography,
   presetUno,
-  transformerAttributifyJsx,
 } from 'unocss'
-
-// import colors from 'windicss/colors'
+import transformerAttributifyJsx from './transformerAttributifyJsx'
 
 export default defineConfig({
   theme: {
-    // colors: {
-    //   gray: {
-    //     ...(colors.gray as Record<string, string>),
-    //     250: '#efefef',
-    //   },
-    // },
   },
   shortcuts: {
     'layout-wrapper': 'h-screen flex flex-nowrap',
@@ -34,8 +26,8 @@ export default defineConfig({
   },
   safelist: 'grow-0 grow-1 shrink-0 shrink-1'.split(' '),
   presets: [
-    presetUno(),
     presetAttributify(),
+    presetUno(),
     presetIcons({
       extraProperties: { 'display': 'inline-block', 'vertical-align': 'middle' },
     }),

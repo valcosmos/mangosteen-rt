@@ -2,9 +2,9 @@ import * as React from 'react'
 
 import WelcomeLayout from '../layouts/WelcomeLayout'
 import Welcome1 from '../page/Welcome1'
-import Welcome2 from '../page/Welcome2'
-import Welcome3 from '../page/Welcome3'
-import Welcome4 from '../page/Welcome4'
+import { Welcome2 } from '../page/Welcome2'
+import { Welcome3 } from '../page/Welcome3'
+import { Welcome4 } from '../page/Welcome4'
 
 export const welcomeRoutes = {
   path: 'welcome',
