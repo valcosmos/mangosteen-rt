@@ -1,27 +1,24 @@
-import React from 'react'
-
 import { createBrowserRouter } from 'react-router-dom'
-import RedirectToWelcome from '../components/RedirectToWelcome'
-import MainLayout from '../layouts/MainLayout'
-import Home from '../page/Home'
+import { Root } from '../components/Root'
+import { WelcomeLayout } from '../layouts/WelcomeLayout'
 
-import { welcomeRoutes } from './welcomeRoutes'
+import { Home } from '../pages/Home'
+import { Welcome1 } from '../pages/Welcome1'
+import { Welcome2 } from '../pages/Welcome2'
+import { Welcome3 } from '../pages/Welcome3'
+import { Welcome4 } from '../pages/Welcome4'
 
 export const router = createBrowserRouter([
+  { path: '/', element: <Root /> },
+  { path: '/home', element: <Home /> },
   {
-    path: '/',
-    element: <MainLayout />,
-    errorElement: <RedirectToWelcome />,
-    children: [welcomeRoutes],
-    // children: [
-    //   { index: true, element: <div>请选择1 2 3</div> }, // 路径为 /
-    //   { path: '1', element: <div>1</div> }, // 路径为 /1
-    //   { path: '2', element: <div>2</div> },
-    //   { path: '3', element: <div>3</div> },
-    // ],
-  },
-  {
-    index: true,
-    element: <Home />,
+    path: '/welcome',
+    element: <WelcomeLayout />,
+    children: [
+      { path: '1', element: <Welcome1 /> },
+      { path: '2', element: <Welcome2 /> },
+      { path: '3', element: <Welcome3 /> },
+      { path: '4', element: <Welcome4 /> },
+    ],
   },
 ])
