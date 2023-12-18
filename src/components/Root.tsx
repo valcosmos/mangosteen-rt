@@ -2,8 +2,8 @@ import { Navigate } from 'react-router-dom'
 import { useLocalStore } from '../stores/useLocalStore'
 
 export const Root: React.FC = () => {
-  const { hasReadWelcomes } = useLocalStore()
-  if (hasReadWelcomes) {
+  const { hasReadWelcome } = useLocalStore()
+  if (hasReadWelcome) {
     return <Navigate to="/home" />
   }
   else {

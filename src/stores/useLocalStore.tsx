@@ -14,7 +14,4 @@ export const useLocalStore = create<Local>(set => ({
     localStorage.setItem('hasReadWelcomes', result)
     set({ hasReadWelcome: result === 'yes' })
   },
-
-  // set: () => set({ count: get().count + 1 }),
-  // add: () => set(demo => ({ count: demo.count + 1 })),
 }))
