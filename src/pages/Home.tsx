@@ -1,10 +1,34 @@
-import type { FC } from 'react'
-import useSwr from 'swr'
+import { type FC, useEffect } from 'react'
+import useSWR from 'swr'
+import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 import p from '../assets/icons/pig.svg'
 import add from '../assets/icons/add.svg'
+import { useTitle } from '../hooks/useTitle'
+import { ajax } from '../lib/ajax'
 
-export const Home: FC = () => {
-  const { data, error } = useSwr('/api/')
+interface Props {
+  title?: string
+}
+
+export const Home: FC<Props> = (props) => {
+  useTitle(props.title)
+  const { data: meData, error: meError } = useSWR('/api/v1/me', async path =>
+    (await ajax.get<Resource<User>>(path)).data.resource)
+  const { data: itemsData, error: itemsError } = useSWR(meData ? '/api/v1/items' : null, async path =>
+    (await ajax.get<Resources<Item>>(path)).data)
+
+  const isLoadingMe = !meData && !meError
+  const isLoadingItems = meData && !itemsData && !itemsError
+
+  if (isLoadingMe || isLoadingItems) {
+    return <div>加载中……</div>
+  }
+
+  if (itemsData?.resources[0]) {
+    return <Navigate to="/items" />
+  }
+
   return (
     <div>
       <div flex justify-center items-center>
