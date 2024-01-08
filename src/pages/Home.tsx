@@ -3,9 +3,11 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 import p from '../assets/icons/pig.svg'
-import add from '../assets/icons/add.svg'
+
 import { useTitle } from '../hooks/useTitle'
 import { ajax } from '../lib/ajax'
+import Loading from '../components/Loading'
+import AddItemFloatButton from '../components/AddItemFloatButton'
 
 interface Props {
   title?: string
@@ -22,7 +24,7 @@ export const Home: FC<Props> = (props) => {
   const isLoadingItems = meData && !itemsData && !itemsError
 
   if (isLoadingMe || isLoadingItems) {
-    return <div>加载中……</div>
+    return <Loading />
   }
 
   if (itemsData?.resources[0]) {
@@ -37,9 +39,7 @@ export const Home: FC<Props> = (props) => {
       <div px-16px>
         <button h-48px w="100%" bg="#5f34bf" b-none rounded-8px text-white>开始记账</button>
       </div>
-      <button w-56px h-56px bg="#5f34bf" rounded="50%" b-none text-6xl p-4px fixed bottom-16px right-16px>
-        <img src={add} max-w="100%" max-h="100%" />
-      </button>
+      <AddItemFloatButton />
     </div>
   )
 }
